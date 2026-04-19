@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Harmonie Musiek Meesters — Klavier en Blokfluit lesse vir alle ouderdomme in Garsfontein, Pretoria. Piano and Recorder lessons for all ages." />
+  <title>Harmonie Musiek Meesters</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* =====================
+       DESIGN TOKENS
+    ===================== */
+    :root {
+      --sage-light:  #D4E8C2;
+      --sage-mid:    #C2DCA8;
+      --sage-dark:   #D4E8C2;
+      --forest:      #1C3A0E;
+      --forest-mid:  #2d5a18;
+      --gold:        #8B6914;
+      --gold-light:  #c49a24;
+      --white:       #ffffff;
+      --text-dark:   #1a2e0d;
+      --text-mid:    #3a5a28;
+      --radius:      12px;
+      --shadow:      0 4px 24px rgba(28,58,14,0.10);
+      --transition:  0.3s ease;
+    }
+
+    /* =====================
+       RESET & BASE
+    ===================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--sage-light);
+      color: var(--text-dark);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--forest);
+      line-height: 1.3;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    img { max-width: 100%; display: block; }
+
+    section { padding: 80px 20px; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-mid);
+      font-size: 1.05rem;
+      margin-bottom: 48px;
+      font-style: italic;
+    }
+
+    /* =====================
+       SPLASH SCREEN
+    ===================== */
+    #splash {
+      position: fixed;
+      inset: 0;
+      background: var(--forest);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      text-align: center;
+      padding: 24px;
+      animation: splashFadeIn 0.6s ease;
+    }
+
+    @keyframes splashFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    #splash.hide {
+      animation: splashFadeOut 0.5s ease forwards;
+    }
+
+    @keyframes splashFadeOut {
+      to { opacity: 0; pointer-events: none; visibility: hidden; }
+    }
+
+    #splash img {
+      width: 160px;
+      margin-bottom: 28px;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
+
+    #splash h1 {
+      color: var(--sage-light);
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    #splash p {
+      color: var(--sage-mid);
+      font-style: italic;
+      margin-bottom: 36px;
+      font-size: 1.05rem;
+    }
+
+    .splash-label {
+      color: #fff;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      opacity: 0.7;
+    }
+
+    .splash-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .splash-btn {
+      padding: 14px 40px;
+      border: 2px solid var(--sage-mid);
+      background: transparent;
+      color: var(--white);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition);
+      letter-spacing: 0.05em;
+    }
+
+    .splash-btn:hover,
+    .splash-btn:focus {
+      background: var(--sage-mid);
+      color: var(--forest);
+      outline: none;
+    }
+
+    /* =====================
+       NAVIGATION
+    ===================== */
+    #navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(212, 232, 194, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--sage-mid);
+      padding: 0 20px;
+      transition: box-shadow var(--transition);
+    }
+
+    #navbar.scrolled {
+      box-shadow: 0 2px 16px rgba(28,58,14,0.12);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      gap: 16px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .nav-logo img {
+      height: 48px;
+      width: auto;
+    }
+
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .nav-logo-text .school-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--forest);
+      letter-spacing: 0.06em;
+    }
+
+    .nav-logo-text .school-sub {
+      font-size: 0.7rem;
+      color: var(--text-mid);
+      letter-spacing: 0.08em;
+      text-transform: lowercase;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--forest);
+      position: relative;
+      padding-bottom: 2px;
+      transition: color var(--transition);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover { color: var(--gold); }
+
+    .lang-toggle {
+      display: flex;
+      gap: 4px;
+      background: var(--sage-dark);
+      border-radius: 50px;
+      padding: 3px;
+      flex-shrink: 0;
+    }
+
+    .lang-btn {
+      padding: 5px 14px;
+      border: none;
+      background: transparent;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      color: var(--text-mid);
+      transition: var(--transition);
+    }
+
+    .lang-btn.active {
+      background: var(--forest);
+      color: var(--white);
+    }
+
+    /* Mobile hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--forest);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--sage-dark);
+        flex-direction: column;
+        gap: 0;
+        border-bottom: 2px solid var(--sage-mid);
+        padding: 8px 0 16px;
+      }
+
+      .nav-links.open { display: flex; }
+
+      .nav-links li { width: 100%; text-align: center; }
+
+      .nav-links a {
+        display: block;
+        padding: 12px 24px;
+      }
+
+      .hamburger { display: flex; }
+    }
+
+    /* =====================
+       HERO
+    ===================== */
+    #hero {
+      min-height: calc(100vh - 70px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, #C8E2B0 0%, var(--sage-light) 50%, #D8ECC8 100%);
+    }
+
+    /* Floating music notes background */
+    .music-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .music-note {
+      position: absolute;
+      font-size: 1.4rem;
+      color: var(--forest);
+      opacity: 0.07;
+      animation: floatNote linear infinite;
+    }
+
+    @keyframes floatNote {
+      0%   { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.07; }
+      90%  { opacity: 0.07; }
+      100% { transform: translateY(-120px) rotate(360deg); opacity: 0; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    .hero-logo {
+      width: 220px;
+      margin: 0 auto 28px;
+      animation: fadeInDown 0.8s ease both;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      color: var(--forest);
+      margin-bottom: 10px;
+      animation: fadeInUp 0.8s 0.1s ease both;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--gold);
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      margin-bottom: 20px;
+      animation: fadeInUp 0.8s 0.2s ease both;
+    }
+
+    .hero-desc {
+      color: var(--text-mid);
+      font-size: 1.05rem;
+      margin-bottom: 36px;
+      animation: fadeInUp 0.8s 0.3s ease both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s 0.4s ease both;
+    }
+
+    .btn-primary {
+      background: var(--forest);
+      color: var(--white);
+      padding: 14px 34px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      transition: var(--transition);
+      border: 2px solid var(--forest);
+    }
+
+    .btn-primary:hover {
+      background: var(--forest-mid);
+      border-color: var(--forest-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(28,58,14,0.25);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--forest);
+      padding: 14px 34px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      border: 2px solid var(--forest);
+      transition: var(--transition);
+    }
+
+    .btn-outline:hover {
+      background: var(--forest);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* Wave divider */
+    .wave-divider {
+      line-height: 0;
+      overflow: hidden;
+      margin-top: -1px;
+    }
+
+    .wave-divider svg {
+      display: block;
+      width: 100%;
+    }
+
+    /* =====================
+       FEATURE CARDS
+    ===================== */
+    #features {
+      background: var(--white);
+      padding: 64px 20px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: var(--sage-dark);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+      border: 1px solid var(--sage-mid);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 36px rgba(28,58,14,0.15);
+    }
+
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--forest);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .feature-icon i {
+      color: var(--sage-light);
+      font-size: 1.6rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      color: var(--text-mid);
+      font-size: 0.95rem;
+    }
+
+    /* =====================
+       ABOUT
+    ===================== */
+    #about {
+      background: var(--sage-light);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 56px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    .about-image-wrap {
+      position: relative;
+    }
+
+    .about-photo {
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto;
+      aspect-ratio: 3/4;
+      background: linear-gradient(135deg, var(--sage-mid), var(--forest-mid));
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      text-align: center;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      gap: 10px;
+    }
+
+    .about-photo i {
+      font-size: 3.5rem;
+      opacity: 0.6;
+    }
+
+    .about-badge {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      background: var(--gold);
+      color: var(--white);
+      border-radius: 50%;
+      width: 88px;
+      height: 88px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.3;
+      box-shadow: 0 4px 16px rgba(139,105,20,0.35);
+    }
+
+    .about-badge i { font-size: 1.1rem; margin-bottom: 3px; }
+
+    .about-text h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin-bottom: 8px; }
+
+    .about-text .tagline {
+      color: var(--gold);
+      font-style: italic;
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+
+    .about-text p { color: var(--text-mid); margin-bottom: 16px; }
+
+    .credentials {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .credential-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--white);
+      padding: 12px 18px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(28,58,14,0.07);
+    }
+
+    .credential-item i {
+      color: var(--gold);
+      font-size: 1.1rem;
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .credential-item span {
+      font-size: 0.92rem;
+      color: var(--text-dark);
+    }
+
+    /* =====================
+       LESSONS
+    ===================== */
+    #lessons {
+      background: var(--white);
+    }
+
+    .lessons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto 48px;
+    }
+
+    .lesson-card {
+      border: 2px solid var(--sage-mid);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lesson-card:hover { transform: translateY(-4px); }
+
+    .lesson-header {
+      background: var(--forest);
+      padding: 24px 24px 20px;
+      text-align: center;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lesson-header i {
+      font-size: 2rem;
+      color: var(--sage-light);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .lesson-header h3 {
+      color: var(--white);
+      font-size: 1.3rem;
+      margin-bottom: 4px;
+    }
+
+    .lesson-header .ages {
+      color: var(--sage-mid);
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lesson-body {
+      padding: 24px;
+      background: var(--sage-dark);
+      flex: 1;
+    }
+
+    .lesson-body ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .lesson-body li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.93rem;
+      color: var(--text-mid);
+    }
+
+    .lesson-body li i {
+      color: var(--gold);
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .tariff-box {
+      max-width: 600px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--forest) 0%, var(--forest-mid) 100%);
+      border-radius: var(--radius);
+      padding: 32px 36px;
+      text-align: center;
+      color: var(--white);
+      box-shadow: 0 8px 32px rgba(28,58,14,0.25);
+    }
+
+    .tariff-box h3 {
+      color: var(--sage-light);
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+
+    .tariff-box p {
+      color: var(--sage-mid);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .tariff-box .btn-gold {
+      background: var(--gold);
+      color: var(--white);
+      padding: 13px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      display: inline-block;
+      transition: var(--transition);
+      border: 2px solid var(--gold);
+    }
+
+    .tariff-box .btn-gold:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    /* =====================
+       CONTACT
+    ===================== */
+    #contact {
+      background: var(--sage-light);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 820px) {
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    .contact-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--forest);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-icon i { color: var(--sage-light); font-size: 0.95rem; }
+
+    .contact-detail strong {
+      display: block;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      margin-bottom: 2px;
+    }
+
+    .contact-detail a, .contact-detail span {
+      color: var(--forest);
+      font-size: 1rem;
+    }
+
+    .contact-detail a:hover { color: var(--gold); text-decoration: underline; }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: #fff;
+      padding: 13px 28px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-top: 24px;
+      transition: var(--transition);
+      box-shadow: 0 4px 16px rgba(37,211,102,0.35);
+    }
+
+    .whatsapp-btn:hover {
+      background: #1dbd5c;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37,211,102,0.4);
+    }
+
+    .contact-form h3 {
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-mid);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--sage-mid);
+      border-radius: 8px;
+      background: var(--white);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      transition: border-color var(--transition);
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--forest);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 14px;
+      background: var(--forest);
+      color: var(--white);
+      border: none;
+      border-radius: 50px;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 8px;
+    }
+
+    .form-submit:hover {
+      background: var(--forest-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(28,58,14,0.25);
+    }
+
+    /* Map */
+    .map-wrap {
+      max-width: 1100px;
+      margin: 56px auto 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 2px solid var(--sage-mid);
+    }
+
+    .map-wrap iframe {
+      width: 100%;
+      height: 320px;
+      display: block;
+      border: none;
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    footer {
+      background: var(--forest);
+      color: var(--sage-mid);
+      padding: 48px 20px 32px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      height: 60px;
+      margin: 0 auto 12px;
+      filter: brightness(0) invert(1);
+      opacity: 0.7;
+    }
+
+    .footer-name {
+      font-family: 'Playfair Display', serif;
+      color: var(--sage-light);
+      font-size: 1.1rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+
+    .footer-tagline {
+      font-style: italic;
+      font-size: 0.9rem;
+      margin-bottom: 28px;
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .footer-nav a {
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sage-mid);
+      transition: color var(--transition);
+    }
+
+    .footer-nav a:hover { color: var(--sage-light); }
+
+    .footer-divider {
+      border: none;
+      border-top: 1px solid rgba(184,217,160,0.2);
+      margin: 0 auto 20px;
+      max-width: 400px;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      opacity: 0.55;
+    }
+
+    /* =====================
+       FREE LESSON OFFER STRIP
+    ===================== */
+    #free-lesson {
+      background: linear-gradient(135deg, var(--gold) 0%, #a07820 100%);
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #free-lesson::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='40' font-size='30' opacity='0.08' fill='white'%3E♪%3C/text%3E%3C/svg%3E") repeat;
+      pointer-events: none;
+    }
+
+    .free-badge {
+      display: inline-block;
+      background: var(--white);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+    }
+
+    #free-lesson h2 {
+      color: var(--white);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 14px;
+    }
+
+    #free-lesson p {
+      color: rgba(255,255,255,0.88);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--gold);
+      padding: 15px 40px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      display: inline-block;
+      transition: var(--transition);
+      border: 2px solid var(--white);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .btn-white:hover {
+      background: transparent;
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.2);
+    }
+
+    /* Hero free pill */
+    .hero-free-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+      animation: fadeInDown 0.8s ease both;
+      box-shadow: 0 4px 14px rgba(139,105,20,0.35);
+    }
+
+    .hero-free-pill i { font-size: 0.85rem; }
+
+    /* =====================
+       SCROLL ANIMATIONS
+    ===================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* =====================
+       SCROLL TO TOP
+    ===================== */
+    #scrollTop {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 44px;
+      height: 44px;
+      background: var(--forest);
+      color: var(--white);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+      box-shadow: 0 4px 16px rgba(28,58,14,0.3);
+      z-index: 500;
+    }
+
+    #scrollTop.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    #scrollTop:hover {
+      background: var(--forest-mid);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== SPLASH SCREEN ==================== -->
+  <div id="splash" role="dialog" aria-modal="true" aria-label="Taalkeuse / Language selection">
+    <img src="logo.png" alt="Harmonie Musiek Meesters logo" />
+    <h1>Harmonie Musiek Meesters</h1>
+    <p><em>"waar elke noot saam speel"</em></p>
+    <div class="splash-label">Kies jou taal &nbsp;/&nbsp; Choose your language</div>
+    <div class="splash-buttons">
+      <button class="splash-btn" onclick="chooseLang('af')" lang="af">Afrikaans</button>
+      <button class="splash-btn" onclick="chooseLang('en')" lang="en">English</button>
+    </div>
+  </div>
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav id="navbar" aria-label="Hoofnavigasie">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#hero" aria-label="Tuisbladsy">
+        <img src="logo.png" alt="Harmonie logo" />
+        <div class="nav-logo-text">
+          <span class="school-name">HARMONIE</span>
+          <span class="school-sub">musiek meesters</span>
+        </div>
+      </a>
+
+      <ul class="nav-links" id="navLinks" role="list">
+        <li><a href="#hero"    data-af="Tuis"   data-en="Home">Tuis</a></li>
+        <li><a href="#about"   data-af="Oor My" data-en="About Me">Oor My</a></li>
+        <li><a href="#lessons" data-af="Lesse"  data-en="Lessons">Lesse</a></li>
+        <li><a href="#contact" data-af="Kontak" data-en="Contact">Kontak</a></li>
+      </ul>
+
+      <div class="lang-toggle" role="group" aria-label="Taalkeuse">
+        <button class="lang-btn active" id="btnAf" onclick="setLanguage('af')" aria-pressed="true">AF</button>
+        <button class="lang-btn"        id="btnEn" onclick="setLanguage('en')" aria-pressed="false">EN</button>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Oopmaak menu" aria-expanded="false" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO ==================== -->
+  <section id="hero">
+    <div class="music-bg" id="musicBg" aria-hidden="true"></div>
+    <div class="hero-content">
+      <img class="hero-logo" src="logo.png" alt="Harmonie Musiek Meesters" />
+      <div class="hero-free-pill">
+        <i class="fas fa-gift" aria-hidden="true"></i>
+        <span data-af="Eerste les GRATIS" data-en="First lesson FREE">Eerste les GRATIS</span>
+      </div>
+      <h1 class="hero-title">Harmonie Musiek Meesters</h1>
+      <p class="hero-subtitle" data-af='"waar elke noot saam speel"' data-en='"where every note plays together"'>"waar elke noot saam speel"</p>
+      <p class="hero-desc"
+         data-af="Klavier &amp; Blokfluit lesse vir alle ouderdomme — van kleuters tot gevorderde leerders — in Garsfontein, Pretoria."
+         data-en="Piano &amp; Recorder lessons for all ages — from toddlers to advanced students — in Garsfontein, Pretoria.">
+        Klavier &amp; Blokfluit lesse vir alle ouderdomme — van kleuters tot gevorderde leerders — in Garsfontein, Pretoria.
+      </p>
+      <div class="hero-buttons">
+        <a class="btn-primary" href="#contact" data-af="Bespreek Gratis Proefles" data-en="Book Free Trial Lesson">Bespreek Gratis Proefles</a>
+        <a class="btn-outline"  href="#about"   data-af="Meer Oor Ons"   data-en="About Us">Meer Oor Ons</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave divider -->
+  <div class="wave-divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,32 C360,64 1080,0 1440,32 L1440,64 L0,64 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+
+  <!-- ==================== FEATURES ==================== -->
+  <section id="features" aria-label="Hoogtepunte">
+    <div class="cards-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-music" aria-hidden="true"></i></div>
+        <h3 data-af="Klavier" data-en="Piano">Klavier</h3>
+        <p data-af="Beginners tot gevorderde leerders. Alle ouderdomme welkom, van kleuters af."
+           data-en="Beginners to advanced students. All ages welcome, from toddlers up.">
+          Beginners tot gevorderde leerders. Alle ouderdomme welkom, van kleuters af.
+        </p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-wind" aria-hidden="true"></i></div>
+        <h3 data-af="Blokfluit" data-en="Recorder">Blokfluit</h3>
+        <p data-af="Lesse vir kleuters tot 14-jariges — 'n wonderlike inleiding tot musiek."
+           data-en="Lessons for toddlers up to 14 years — a wonderful introduction to music.">
+          Lesse vir kleuters tot 14-jariges — 'n wonderlike inleiding tot musiek.
+        </p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-book-open" aria-hidden="true"></i></div>
+        <h3 data-af="Musiekteorie" data-en="Music Theory">Musiekteorie</h3>
+        <p data-af="Teorie, sang en slagorkes vorm deel van alle leerders se klasse."
+           data-en="Theory, singing and percussion form part of every student's class.">
+          Teorie, sang en slagorkes vorm deel van alle leerders se klasse.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FREE LESSON OFFER ==================== -->
+  <section id="free-lesson">
+    <div class="free-badge">
+      <span data-af="Beperkte aanbod" data-en="Limited offer">Beperkte aanbod</span>
+    </div>
+    <h2 data-af="Jou eerste les is GRATIS" data-en="Your first lesson is FREE">Jou eerste les is GRATIS</h2>
+    <p data-af="Geen verbintenis nodig nie. Kom ervaar Lidia se unieke onderrigstyl en kyk of dit die regte pas vir jou kind is — heeltemal gratis."
+       data-en="No commitment required. Come experience Lidia's unique teaching style and see if it's the right fit for your child — completely free of charge.">
+      Geen verbintenis nodig nie. Kom ervaar Lidia se unieke onderrigstyl en kyk of dit die regte pas vir jou kind is — heeltemal gratis.
+    </p>
+    <a class="btn-white" href="#contact" data-af="Eis Jou Gratis Les" data-en="Claim Your Free Lesson">Eis Jou Gratis Les</a>
+  </section>
+
+  <!-- Wave divider -->
+  <div class="wave-divider" aria-hidden="true" style="background:#a07820;">
+    <svg viewBox="0 0 1440 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,32 C360,0 1080,64 1440,32 L1440,64 L0,64 Z" fill="#D4E8C2"/>
+    </svg>
+  </div>
+
+  <!-- ==================== ABOUT ==================== -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-image-wrap reveal">
+        <div class="about-photo">
+          <i class="fas fa-user" aria-hidden="true"></i>
+          <span data-af="Foto van Lidia Kritzinger" data-en="Photo of Lidia Kritzinger">Foto van Lidia Kritzinger</span>
+        </div>
+        <div class="about-badge" aria-label="Meestersgraad in Musiek">
+          <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+          <span data-af="Meestersgraad Musiek" data-en="Masters Degree Music">Meestersgraad Musiek</span>
+        </div>
+      </div>
+
+      <div class="about-text reveal">
+        <h2 data-af="Oor Lidia Kritzinger" data-en="About Lidia Kritzinger">Oor Lidia Kritzinger</h2>
+        <p class="tagline" data-af='"Musiek is die taal van die siel"' data-en='"Music is the language of the soul"'>"Musiek is die taal van die siel"</p>
+        <p data-af="Lidia Kritzinger is 'n passievolle musiekonderwyseres gebaseer in Garsfontein, Pretoria. Met 'n Meestersgraad in Musiek bring sy 'n diepgaande begrip van musiek na elke les."
+           data-en="Lidia Kritzinger is a passionate music teacher based in Garsfontein, Pretoria. With a Master's Degree in Music, she brings a profound understanding of music to every lesson.">
+          Lidia Kritzinger is 'n passievolle musiekonderwyseres gebaseer in Garsfontein, Pretoria. Met 'n Meestersgraad in Musiek bring sy 'n diepgaande begrip van musiek na elke les.
+        </p>
+        <p data-af="Haar unieke benadering omsluit leerders van alle ouderdomme — van speelse kleuters wat vir die eerste keer 'n noot speel, tot gevorderde studente wat kompetisies voorberei."
+           data-en="Her unique approach embraces students of all ages — from playful toddlers playing a note for the very first time, to advanced students preparing for competitions.">
+          Haar unieke benadering omsluit leerders van alle ouderdomme — van speelse kleuters wat vir die eerste keer 'n noot speel, tot gevorderde studente wat kompetisies voorberei.
+        </p>
+        <p data-af="By Harmonie Musiek Meesters is elke les meer as net musiek — dit is 'n geleentheid om te groei, te geniet en te floreer."
+           data-en="At Harmonie Musiek Meesters, every lesson is more than just music — it is an opportunity to grow, enjoy and flourish.">
+          By Harmonie Musiek Meesters is elke les meer as net musiek — dit is 'n geleentheid om te groei, te geniet en te floreer.
+        </p>
+
+        <div class="credentials">
+          <div class="credential-item">
+            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+            <span data-af="Meestersgraad in Musiek" data-en="Master's Degree in Music">Meestersgraad in Musiek</span>
+          </div>
+          <div class="credential-item">
+            <i class="fas fa-music" aria-hidden="true"></i>
+            <span data-af="Klavier: Beginners tot Gevorderd" data-en="Piano: Beginners to Advanced">Klavier: Beginners tot Gevorderd</span>
+          </div>
+          <div class="credential-item">
+            <i class="fas fa-child" aria-hidden="true"></i>
+            <span data-af="Spesialiseer in alle ouderdomsgroepe — kleuters tot volwassenes" data-en="Specialises in all age groups — toddlers to adults">Spesialiseer in alle ouderdomsgroepe — kleuters tot volwassenes</span>
+          </div>
+          <div class="credential-item">
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+            <span data-af="Gebaseer in Garsfontein, Pretoria" data-en="Based in Garsfontein, Pretoria">Gebaseer in Garsfontein, Pretoria</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave divider -->
+  <div class="wave-divider" aria-hidden="true" style="background:#D4E8C2;">
+    <svg viewBox="0 0 1440 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,32 C360,64 1080,0 1440,32 L1440,64 L0,64 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+
+  <!-- ==================== LESSONS ==================== -->
+  <section id="lessons">
+    <div class="container">
+      <h2 class="section-title" data-af="Lesse &amp; Tariewe" data-en="Lessons &amp; Rates">Lesse &amp; Tariewe</h2>
+      <p class="section-subtitle"
+         data-af="Individuele en groeplesse beskikbaar — gepas vir elke leerder se behoeftes"
+         data-en="Individual and group lessons available — tailored to every student's needs">
+        Individuele en groeplesse beskikbaar — gepas vir elke leerder se behoeftes
+      </p>
+
+      <div class="lessons-grid">
+        <!-- Piano -->
+        <div class="lesson-card reveal">
+          <div class="lesson-header">
+            <i class="fas fa-music" aria-hidden="true"></i>
+            <h3 data-af="Klavier" data-en="Piano">Klavier</h3>
+            <span class="ages" data-af="Alle ouderdomme • Kleuters tot Gevorderd" data-en="All ages • Toddlers to Advanced">Alle ouderdomme • Kleuters tot Gevorderd</span>
+          </div>
+          <div class="lesson-body">
+            <ul>
+              <li><i class="fas fa-check-circle" aria-hidden="true"></i>
+                <span data-af="Individuele privaat lesse" data-en="Individual private lessons">Individuele privaat lesse</span></li>
+              <li><i class="fas fa-check-circle" aria-hidden="true"></i>
+                <span data-af="Groeplesse vir kleuters" data-en="Group lessons for toddlers">Groeplesse vir kleuters</span></li>
+              <li><i class="fas fa-check-circle" aria-hidden="true"></i>
+                <span data-af="Speelse, kreatiewe benadering vir jong leerders" data-en="Playful, creative approach for young learners">Speelse, kreatiewe benadering vir jong leerders</span></li>
+              <li><i class="fas fa-check-circle" aria-hidden="true"></i>
+                <span data-af="Gevorderde tegnieketrekkings en repertorium" data-en="Advanced technique and repertoire">Gevorderde tegnieketrekkings en repertorium</span></li>
+              <li><i class="fas fa-check-circle" aria-hidden="true"></i>
+                <span data-af="Voorbereiding vir eksamens en kompetisies" data-en="Preparation for exams and competitions">Voorbereiding vir eksamens en kompetisies</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Recorder -->
+        <div class="lesson-card reveal">
+          <div class="lesson-header">
+            <i class="fas fa-wind" aria-hidden="true"></i>
+            <h3 data-af="Blokfluit" data-en="Recorder">Blokfluit</h3>
+            <span class="ages" data-af="Kleuters tot 14 jaar" data-en="Toddlers to 14 years">Kleuters tot 14 jaar</span>
+          </div>
+          <div class="lesson-body">
+            <ul>
+              <li><i class="fas fa-check-circle" aria-hidden="true"></i>
+                <span data-af="Ideaal as eerste instrument vir kleuters" data-en="Ideal as first instrument for toddlers">Ideaal as eerste instrument vir kleuters</span></li>
+              <li><i class="fas fa-check-circle" aria-hidden="true"></i>
+                <span data-af="Individuele en groeplesse" data-en="Individual and group lessons">Individuele en groeplesse</span></li>
+              <li><i class="fas fa-check-circle" aria-hidden="true"></i>
+                <span data-af="Ontwikkel gehoor en koördinasie" data-en="Develops ear training and coordination">Ontwikkel gehoor en koördinasie</span></li>
+              <li><i class="fas fa-check-circle" aria-hidden="true"></i>
+                <span data-af="Pret en speel-speel benadering" data-en="Fun and playful approach">Pret en speel-speel benadering</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Theory -->
+        <div class="lesson-card reveal">
+          <div class="lesson-header">
+            <i class="fas fa-book-open" aria-hidden="true"></i>
+            <h3 data-af="Musiekteorie, Sang &amp; Slagorkes" data-en="Music Theory, Singing &amp; Percussion">Musiekteorie, Sang &amp; Slagorkes</h3>
+            <span class="ages" data-af="Ingesluit by alle leerders se klasse" data-en="Included in all students' lessons">Ingesluit by alle leerders se klasse</span>
+          </div>
+          <div class="lesson-body">
+            <ul>
+              <li><i class="fas fa-check-circle" aria-hidden="true"></i>
+                <span data-af="Musiekteorie as deel van elke les" data-en="Music theory as part of every lesson">Musiekteorie as deel van elke les</span></li>
+              <li><i class="fas fa-check-circle" aria-hidden="true"></i>
+                <span data-af="Sang en stemgebruik vir selfvertroue" data-en="Singing and voice for self-confidence">Sang en stemgebruik vir selfvertroue</span></li>
+              <li><i class="fas fa-check-circle" aria-hidden="true"></i>
+                <span data-af="Ritmiese ontwikkeling met slagorkes" data-en="Rhythmic development with percussion">Ritmiese ontwikkeling met slagorkes</span></li>
+              <li><i class="fas fa-check-circle" aria-hidden="true"></i>
+                <span data-af="Holistiese musiekopvoeding" data-en="Holistic music education">Holistiese musiekopvoeding</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tariff box -->
+      <div class="tariff-box reveal">
+        <h3 data-af="Tariewe &amp; Skedule" data-en="Rates &amp; Schedule">Tariewe &amp; Skedule</h3>
+        <p data-af="Kontak Lidia direk vir tariewe, beskikbare tydsgleuwe en inskrywingbesonderhede. Sy sal graag die regte pakket vir jou kind saambespreek."
+           data-en="Contact Lidia directly for rates, available time slots and enrolment details. She would love to discuss the right package for your child.">
+          Kontak Lidia direk vir tariewe, beskikbare tydsgleuwe en inskrywingbesonderhede. Sy sal graag die regte pakket vir jou kind saambespreek.
+        </p>
+        <a class="btn-gold" href="#contact" data-af="Kontak Ons Nou" data-en="Contact Us Now">Kontak Ons Nou</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave divider -->
+  <div class="wave-divider" aria-hidden="true" style="background:#fff;">
+    <svg viewBox="0 0 1440 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,32 C360,0 1080,64 1440,32 L1440,64 L0,64 Z" fill="#D4E8C2"/>
+    </svg>
+  </div>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title" data-af="Kontak Ons" data-en="Contact Us">Kontak Ons</h2>
+      <p class="section-subtitle"
+         data-af="Ons hoor graag van jou — bespreek 'n proefles of vra gerus 'n vraag"
+         data-en="We would love to hear from you — book a trial lesson or ask any question">
+        Ons hoor graag van jou — bespreek 'n proefles of vra gerus 'n vraag
+      </p>
+
+      <div class="contact-grid">
+        <!-- Info side -->
+        <div class="contact-info reveal">
+          <h3 data-af="Kontak Besonderhede" data-en="Contact Details">Kontak Besonderhede</h3>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div>
+            <div class="contact-detail">
+              <strong data-af="Adres" data-en="Address">Adres</strong>
+              <span>Walter Buntonstraat 390, Garsfontein, Pretoria</span>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-phone" aria-hidden="true"></i></div>
+            <div class="contact-detail">
+              <strong data-af="Telefoon / WhatsApp" data-en="Phone / WhatsApp">Telefoon / WhatsApp</strong>
+              <a href="tel:+27824174300">082 417 4300</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-envelope" aria-hidden="true"></i></div>
+            <div class="contact-detail">
+              <strong data-af="E-pos" data-en="Email">E-pos</strong>
+              <a href="mailto:kritzinger.lidia57@gmail.com">kritzinger.lidia57@gmail.com</a>
+            </div>
+          </div>
+
+          <a class="whatsapp-btn"
+             href="https://wa.me/27824174300"
+             target="_blank"
+             rel="noopener noreferrer"
+             data-af="Stuur 'n WhatsApp"
+             data-en="Send a WhatsApp">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            Stuur 'n WhatsApp
+          </a>
+        </div>
+
+        <!-- Form side -->
+        <div class="contact-form reveal">
+          <h3 data-af="Stuur 'n Boodskap" data-en="Send a Message">Stuur 'n Boodskap</h3>
+
+          <!-- Success message (hidden until form submitted) -->
+          <div id="formSuccess" style="display:none; background:var(--sage-dark); border:2px solid var(--forest); border-radius:var(--radius); padding:28px; text-align:center;">
+            <i class="fas fa-check-circle" style="font-size:2.5rem; color:var(--forest); margin-bottom:12px; display:block;"></i>
+            <h4 style="color:var(--forest); margin-bottom:8px;" data-af="Boodskap gestuur!" data-en="Message sent!">Boodskap gestuur!</h4>
+            <p style="color:var(--text-mid); font-size:0.95rem;" data-af="Dankie! Lidia sal so gou moontlik by jou uitkom." data-en="Thank you! Lidia will get back to you as soon as possible.">Dankie! Lidia sal so gou moontlik by jou uitkom.</p>
+          </div>
+
+          <form id="contactForm" onsubmit="submitForm(event)">
+            <!-- Replace YOUR_FORM_ID below with your Formspree ID -->
+            <input type="hidden" name="_formspree_id" value="mnjlvwzd" />
+            <input type="hidden" name="_subject" value="Harmonie Musiek Meesters — Nuwe navraag" />
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname" data-af="Naam" data-en="Name">Naam</label>
+                <input type="text" id="fname" name="name" required
+                       data-placeholder-af="Jou naam"
+                       data-placeholder-en="Your name"
+                       placeholder="Jou naam" />
+              </div>
+              <div class="form-group">
+                <label for="femail" data-af="E-pos" data-en="Email">E-pos</label>
+                <input type="email" id="femail" name="email" required
+                       data-placeholder-af="jou@epos.com"
+                       data-placeholder-en="your@email.com"
+                       placeholder="jou@epos.com" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="fphone" data-af="Telefoonnommer" data-en="Phone Number">Telefoonnommer</label>
+              <input type="tel" id="fphone" name="phone"
+                     data-placeholder-af="082 000 0000"
+                     data-placeholder-en="082 000 0000"
+                     placeholder="082 000 0000" />
+            </div>
+            <div class="form-group">
+              <label for="flesson" data-af="Voorkeur Les" data-en="Preferred Lesson">Voorkeur Les</label>
+              <select id="flesson" name="lesson">
+                <option value="" data-af="— Kies 'n Les —" data-en="— Choose a Lesson —">— Kies 'n Les —</option>
+                <option value="gratis" data-af="🎁 Gratis Proefles (Eerste les gratis!)" data-en="🎁 Free Trial Lesson (First lesson free!)">🎁 Gratis Proefles (Eerste les gratis!)</option>
+                <option value="klavier" data-af="Klavier (Piano)" data-en="Piano">Klavier (Piano)</option>
+                <option value="blokfluit" data-af="Blokfluit (Recorder)" data-en="Recorder (Blokfluit)">Blokfluit (Recorder)</option>
+                <option value="teorie" data-af="Musiekteorie" data-en="Music Theory">Musiekteorie</option>
+                <option value="anders" data-af="Ander / Nie seker nie" data-en="Other / Not sure">Ander / Nie seker nie</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="fmsg" data-af="Boodskap" data-en="Message">Boodskap</label>
+              <textarea id="fmsg" name="message" required
+                        data-placeholder-af="Vertel ons meer oor jouself of jou kind, ouderdom en ervaring..."
+                        data-placeholder-en="Tell us more about yourself or your child, age and experience..."
+                        placeholder="Vertel ons meer oor jouself of jou kind, ouderdom en ervaring..."></textarea>
+            </div>
+            <button type="submit" class="form-submit" id="formBtn" data-af="Stuur Boodskap" data-en="Send Message">Stuur Boodskap</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div class="map-wrap reveal">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3593.2!2d28.3274!3d-25.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9561b4b5e77777%3A0x1!2sWalter+Buntonstraat+390%2C+Garsfontein%2C+Pretoria!5e0!3m2!1saf!2sza!4v1600000000000"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Harmonie Musiek Meesters — Walter Buntonstraat 390, Garsfontein"
+          aria-label="Google Maps — Walter Buntonstraat 390, Garsfontein, Pretoria">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <img class="footer-logo" src="logo.png" alt="Harmonie Musiek Meesters" />
+    <p class="footer-name">HARMONIE MUSIEK MEESTERS</p>
+    <p class="footer-tagline" data-af='"waar elke noot saam speel"' data-en='"where every note plays together"'>"waar elke noot saam speel"</p>
+
+    <nav class="footer-nav" aria-label="Voetteks navigasie">
+      <a href="#hero"    data-af="Tuis"       data-en="Home">Tuis</a>
+      <a href="#about"   data-af="Oor My"     data-en="About Me">Oor My</a>
+      <a href="#lessons" data-af="Lesse"      data-en="Lessons">Lesse</a>
+      <a href="#contact" data-af="Kontak"     data-en="Contact">Kontak</a>
+    </nav>
+
+    <hr class="footer-divider" />
+    <p class="footer-copy" data-af="© 2026 Harmonie Musiek Meesters · Garsfontein, Pretoria"
+                            data-en="© 2026 Harmonie Musiek Meesters · Garsfontein, Pretoria">
+      © 2026 Harmonie Musiek Meesters · Garsfontein, Pretoria
+    </p>
+  </footer>
+
+  <!-- Scroll to top button -->
+  <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Terug na bo">
+    <i class="fas fa-chevron-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    /* ---- Language system ---- */
+    let currentLang = 'af';
+
+    function chooseLang(lang) {
+      const splash = document.getElementById('splash');
+      splash.classList.add('hide');
+      setTimeout(() => { splash.style.display = 'none'; }, 600);
+      setLanguage(lang);
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('hmm_lang', lang);
+      document.documentElement.lang = lang;
+
+      // Update all [data-af] / [data-en] text nodes
+      document.querySelectorAll('[data-af]').forEach(el => {
+        const val = el.getAttribute('data-' + lang);
+        if (val !== null) el.textContent = val;
+      });
+
+      // Update placeholders
+      document.querySelectorAll('[data-placeholder-af]').forEach(el => {
+        const val = el.getAttribute('data-placeholder-' + lang);
+        if (val !== null) el.placeholder = val;
+      });
+
+      // Update select options
+      document.querySelectorAll('select option[data-af]').forEach(opt => {
+        const val = opt.getAttribute('data-' + lang);
+        if (val !== null) opt.textContent = val;
+      });
+
+      // Update lang toggle buttons
+      document.getElementById('btnAf').classList.toggle('active', lang === 'af');
+      document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+      document.getElementById('btnAf').setAttribute('aria-pressed', lang === 'af');
+      document.getElementById('btnEn').setAttribute('aria-pressed', lang === 'en');
+    }
+
+    /* ---- Init on load ---- */
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('hmm_lang');
+
+      if (saved) {
+        // User has visited before — skip splash, use saved lang
+        const splash = document.getElementById('splash');
+        splash.style.display = 'none';
+        setLanguage(saved);
+      }
+      // else: splash is already visible, user must choose
+
+      // Navbar scroll shadow
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 20);
+        document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+      }, { passive: true });
+
+      // Reveal on scroll
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      reveals.forEach(r => observer.observe(r));
+
+      // Floating music notes
+      spawnNotes();
+
+      // Close mobile menu on link click
+      document.querySelectorAll('#navLinks a').forEach(a => {
+        a.addEventListener('click', () => {
+          document.getElementById('navLinks').classList.remove('open');
+          const hb = document.getElementById('hamburger');
+          hb.classList.remove('open');
+          hb.setAttribute('aria-expanded', 'false');
+        });
+      });
+    });
+
+    /* ---- Mobile menu toggle ---- */
+    function toggleMenu() {
+      const links = document.getElementById('navLinks');
+      const hb    = document.getElementById('hamburger');
+      const open  = links.classList.toggle('open');
+      hb.classList.toggle('open', open);
+      hb.setAttribute('aria-expanded', open);
+    }
+
+    /* ---- Floating music notes ---- */
+    const NOTES = ['♩','♪','♫','♬','𝄞','𝄢'];
+
+    function spawnNotes() {
+      const bg = document.getElementById('musicBg');
+      for (let i = 0; i < 18; i++) {
+        const note = document.createElement('span');
+        note.className = 'music-note';
+        note.textContent = NOTES[Math.floor(Math.random() * NOTES.length)];
+        note.style.left = Math.random() * 100 + '%';
+        note.style.fontSize = (1 + Math.random() * 1.4) + 'rem';
+        const duration = 14 + Math.random() * 20;
+        const delay = Math.random() * 18;
+        note.style.animationDuration = duration + 's';
+        note.style.animationDelay = delay + 's';
+        bg.appendChild(note);
+      }
+    }
+
+    /* ---- Contact form → Formspree ---- */
+    async function submitForm(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn  = document.getElementById('formBtn');
+
+      const formId = form._formspree_id.value;
+
+      // If not yet configured, fall back to mailto
+      if (!formId || formId === 'YOUR_FORM_ID') {
+        const name    = form.name.value.trim();
+        const email   = form.email.value.trim();
+        const lesson  = form.lesson.value;
+        const message = form.message.value.trim();
+        const subject = `Music lesson enquiry from ${name}`;
+        const body    = `Name: ${name}\nEmail: ${email}\nPhone: ${form.phone.value}\nLesson: ${lesson}\n\nMessage:\n${message}`;
+        window.location.href = `mailto:kritzinger.lidia57@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        return;
+      }
+
+      // Disable button and show loading state
+      btn.disabled = true;
+      btn.textContent = currentLang === 'af' ? 'Besig om te stuur…' : 'Sending…';
+
+      try {
+        const response = await fetch(`https://formspree.io/f/${formId}`, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+
+        if (response.ok) {
+          // Show success message, hide form
+          form.style.display = 'none';
+          document.getElementById('formSuccess').style.display = 'block';
+          // Re-apply language to success message
+          setLanguage(currentLang);
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = currentLang === 'af' ? 'Stuur Boodskap' : 'Send Message';
+        alert(currentLang === 'af'
+          ? 'Oeps! Iets het fout gegaan. Skakel ons asseblief direk op 082 417 4300.'
+          : 'Oops! Something went wrong. Please contact us directly on 082 417 4300.');
+      }
+    }
+  </script>
+</body>
+</html>
